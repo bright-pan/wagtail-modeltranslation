@@ -509,7 +509,7 @@ def _validate_slugs(page):
 
         for model in allowed_sibblings:
             slug = getattr(page, current_slug, '') or ''
-            if len(slug) and model is not Page:
+            if len(slug) and model is not Page and hasattr(model, slug):
                 kwargs = {'{0}__{1}'.format(model._meta.model_name, current_slug): slug}
                 query_list.append(Q(**kwargs))
 
